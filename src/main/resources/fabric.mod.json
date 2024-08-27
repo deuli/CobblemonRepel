@@ -10,9 +10,6 @@
     "icon": "assets/cobblemonrepel/icon.png",
     "environment": "server",
     "entrypoints": {
-        "client": [
-            "deuli.cobblemonrepel.client.CobblemonRepelClient"
-        ],
         "main": [
             "deuli.cobblemonrepel.CobblemonRepel"
         ]
