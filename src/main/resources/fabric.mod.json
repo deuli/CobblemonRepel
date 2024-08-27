@@ -8,14 +8,14 @@
     "contact": {},
     "license": "All-Rights-Reserved",
     "icon": "assets/cobblemonrepel/icon.png",
-    "environment": "server",
+    "environment": "*",
     "entrypoints": {
         "main": [
             "deuli.cobblemonrepel.CobblemonRepel"
         ]
     },
     "depends": {
-        "fabricloader": ">=${loader_version}",
+        "fabricloader": ">=0.16",
         "fabric": "*",
         "minecraft": "${minecraft_version}",
         "cobblemon": ">=1.5.2",
