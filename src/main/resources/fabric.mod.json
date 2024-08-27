@@ -1,0 +1,27 @@
+{
+    "schemaVersion": 1,
+    "id": "cobblemonrepel",
+    "version": "${version}",
+    "name": "Cobblemon Repel",
+    "description": "Stop Pokémon spawns in an area",
+    "authors": ["deuli"],
+    "contact": {},
+    "license": "All-Rights-Reserved",
+    "icon": "assets/cobblemonrepel/icon.png",
+    "environment": "server",
+    "entrypoints": {
+        "client": [
+            "deuli.cobblemonrepel.client.CobblemonRepelClient"
+        ],
+        "main": [
+            "deuli.cobblemonrepel.CobblemonRepel"
+        ]
+    },
+    "depends": {
+        "fabricloader": ">=${loader_version}",
+        "fabric": "*",
+        "minecraft": "${minecraft_version}",
+        "cobblemon": ">=1.5.2",
+        "polymer-core": ">=0.5.19"
+    }
+}
