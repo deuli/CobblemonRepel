@@ -16,6 +16,8 @@ public class CobblemonRepel implements ModInitializer {
 
     public static final String MOD_ID = "cobblemonrepel";
 
+    public static final int REPEL_RANGE = 32;
+
     public static final RepelBlock REPEL_BLOCK = Registry.register(Registries.BLOCK, Identifier.of(MOD_ID, "repel_block"), new RepelBlock());
     public static final RepelBlockItem REPEL_BLOCK_ITEM = Registry.register(Registries.ITEM, Identifier.of(MOD_ID, "repel_block"), new RepelBlockItem());
 
@@ -25,9 +27,9 @@ public class CobblemonRepel implements ModInitializer {
 
         CobblemonEvents.POKEMON_ENTITY_SPAWN.subscribe(Priority.NORMAL, event -> {
             ServerWorld world = event.getCtx().getWorld();
-            for (int x = -32; x <= 32; x++) {
-                for (int y = -32; y <= 32; y++) {
-                    for (int z = -32; z <= 32; z++) {
+            for (int x = -REPEL_RANGE; x <= REPEL_RANGE; x++) {
+                for (int y = -REPEL_RANGE; y <= REPEL_RANGE; y++) {
+                    for (int z = -REPEL_RANGE; z <= REPEL_RANGE; z++) {
                         BlockPos pos = event.getCtx().getPosition().add(x, y, z);
                         if (world.getBlockState(pos).getBlock().equals(REPEL_BLOCK)) {
                             event.cancel();
