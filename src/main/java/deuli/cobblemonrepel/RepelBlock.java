@@ -34,7 +34,7 @@ public class RepelBlock extends Block implements PolymerHeadBlock {
 
     @Override
     public String getPolymerSkinValue(BlockState state, BlockPos pos, ServerPlayerEntity player) {
-        return "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYTg1Njg5MTgyOWY1ZTEyNWMyNTIwMTZhZTdlNDg0NmVmMzllNzBmZTBlYzEzMmI1YTUxMjZjZWFhMGE2NWY0NCJ9fX0=";
+        return "ewogICJ0aW1lc3RhbXAiIDogMTcyNDg1ODY1ODExMywKICAicHJvZmlsZUlkIiA6ICIxNTUyNmU1OGZhOWE0NjBmODhhNmZhNjk1M2RlNjgzNyIsCiAgInByb2ZpbGVOYW1lIiA6ICJQaWVkcml0YTE3IiwKICAic2lnbmF0dXJlUmVxdWlyZWQiIDogdHJ1ZSwKICAidGV4dHVyZXMiIDogewogICAgIlNLSU4iIDogewogICAgICAidXJsIiA6ICJodHRwOi8vdGV4dHVyZXMubWluZWNyYWZ0Lm5ldC90ZXh0dXJlLzkzNWJmZmExN2ZmYWM4Yzk4ZjIyODM0ZjFkZjM3NGMyNDlmY2FlNzhlNGI4MDAwMWE1OThhZmI4N2M4MDU5YyIKICAgIH0KICB9Cn0=";
     }
 
     @Override
