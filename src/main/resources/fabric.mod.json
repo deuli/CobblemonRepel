@@ -20,5 +20,8 @@
         "minecraft": "${minecraft_version}",
         "cobblemon": ">=1.5.2",
         "polymer-core": ">=0.5.19"
-    }
+    },
+    "mixins": [
+        "cobblemonrepel.mixins.json"
+    ]
 }
