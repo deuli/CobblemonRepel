@@ -14,7 +14,6 @@ public abstract class CobblemonSpawnNotificationMixin {
             index = 2, remap = false)
     private Function1<SpawnEvent<PokemonEntity>, Void> onInitialize(Function1<SpawnEvent<PokemonEntity>, Void> par3) {
         return event -> {
-            System.out.println("HELLO WORLD!");
             if (!event.isCanceled()) par3.invoke(event);
             return null;
         };
