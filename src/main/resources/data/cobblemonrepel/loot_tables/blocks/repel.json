@@ -6,7 +6,7 @@
             "entries": [
                 {
                     "type": "minecraft:item",
-                    "name": "cobblemonrepel:repel_block",
+                    "name": "cobblemonrepel:repel",
                     "conditions": [
                         {
                             "condition": "minecraft:survives_explosion"
@@ -16,5 +16,5 @@
             ]
         }
     ],
-    "random_sequence": "cobblemonrepel:blocks/repel_block"
+    "random_sequence": "cobblemonrepel:blocks/repel"
 }
