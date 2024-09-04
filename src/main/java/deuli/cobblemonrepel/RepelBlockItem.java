@@ -1,10 +1,24 @@
 package deuli.cobblemonrepel;
 
 import eu.pb4.polymer.core.api.item.PolymerHeadBlockItem;
+import net.minecraft.client.item.TooltipContext;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.text.Text;
+import net.minecraft.util.Formatting;
+import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
 
 public class RepelBlockItem extends PolymerHeadBlockItem {
     public RepelBlockItem() {
         super(CobblemonRepel.REPEL_BLOCK, new Item.Settings());
+    }
+
+    @Override
+    public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
+        tooltip.add(Text.translatable("block.cobblemonrepel.repel.info").formatted(Formatting.GRAY));
+        tooltip.add(Text.translatable("block.cobblemonrepel.repel.info.range", Text.literal(String.valueOf(CobblemonRepel.REPEL_RANGE))).formatted(Formatting.GRAY));
     }
 }

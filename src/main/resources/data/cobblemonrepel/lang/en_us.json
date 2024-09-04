@@ -1,4 +1,7 @@
 {
     "block.cobblemonrepel.repel": "Repel",
-    "item.cobblemonrepel.repel": "Repel"
+    "item.cobblemonrepel.repel": "Repel",
+
+    "block.cobblemonrepel.repel.info": "Prevents Pokémon spawns in an area",
+    "block.cobblemonrepel.repel.info.range": "Range: %s"
 }
