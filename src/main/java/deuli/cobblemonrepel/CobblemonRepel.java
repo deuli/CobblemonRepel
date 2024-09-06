@@ -28,12 +28,15 @@ public class CobblemonRepel implements ModInitializer {
         CobblemonEvents.POKEMON_ENTITY_SPAWN.subscribe(Priority.HIGHEST, event -> {
             ServerWorld world = event.getCtx().getWorld();
             BlockPos spawnPos = event.getCtx().getPosition();
-            if (BlockPos.findClosest(spawnPos, REPEL_RANGE, REPEL_RANGE,
-                    pos -> world.getBlockState(pos).getBlock().equals(REPEL_BLOCK)).isPresent()) {
+            if (isRepelNearby(world, spawnPos)) {
                 event.cancel();
             }
 
             return Unit.INSTANCE;
         });
+    }
+
+    public static boolean isRepelNearby(ServerWorld world, BlockPos pos) {
+        return BlockPos.findClosest(pos, REPEL_RANGE, REPEL_RANGE, p -> world.getBlockState(p).getBlock().equals(REPEL_BLOCK)).isPresent();
     }
 }

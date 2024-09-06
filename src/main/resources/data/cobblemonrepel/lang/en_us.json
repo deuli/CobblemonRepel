@@ -3,5 +3,7 @@
     "item.cobblemonrepel.repel": "Repel",
 
     "block.cobblemonrepel.repel.info": "Prevents Pokémon spawns in an area",
-    "block.cobblemonrepel.repel.info.range": "Range: %s"
+    "block.cobblemonrepel.repel.info.range": "Range: %s",
+    "block.cobblemonrepel.repel.nearby": "There's already a Repel nearby",
+    "block.cobblemonrepel.repel.notfound": "No Repels found nearby"
 }
