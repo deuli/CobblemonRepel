@@ -22,8 +22,8 @@ public class RepelBlockItem extends PolymerHeadBlockItem {
 
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
-        tooltip.add(Text.translatable("block.cobblemonrepel.repel.info").formatted(Formatting.GRAY));
-        tooltip.add(Text.translatable("block.cobblemonrepel.repel.info.range", Text.literal(String.valueOf(CobblemonRepel.REPEL_RANGE))).formatted(Formatting.GRAY));
+        tooltip.add(Text.translatable("block.cobblemonrepel.repel.info", Text.literal(String.valueOf(CobblemonRepel.REPEL_RANGE))).formatted(Formatting.GRAY));
+        tooltip.add(Text.translatable("block.cobblemonrepel.repel.info.rightclick").formatted(Formatting.GRAY));
     }
 
     @Override
