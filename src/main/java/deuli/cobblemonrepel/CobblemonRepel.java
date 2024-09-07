@@ -21,7 +21,7 @@ public class CobblemonRepel implements ModInitializer {
 
     public static final RepelBlock REPEL_BLOCK = Registry.register(Registries.BLOCK, Identifier.of(MOD_ID, "repel"), new RepelBlock());
     public static final RepelBlockItem REPEL_BLOCK_ITEM = Registry.register(Registries.ITEM, Identifier.of(MOD_ID, "repel"), new RepelBlockItem());
-    public static final GameRules.Key<GameRules.IntRule> REPEL_RANGE = GameRuleRegistry.register("repelRange", GameRules.Category.MISC, GameRuleFactory.createIntRule(32, 0));
+    public static final GameRules.Key<GameRules.IntRule> REPEL_RANGE = GameRuleRegistry.register("repelRange", GameRules.Category.SPAWNING, GameRuleFactory.createIntRule(32, 0));
 
     @Override
     public void onInitialize() {
