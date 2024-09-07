@@ -8,5 +8,6 @@
     "block.cobblemonrepel.repel.not_found": "No Repels found nearby",
     "block.cobblemonrepel.repel.disabled": "Repels have been disabled",
 
-    "gamerule.repelRange": "The range a Repel should prevent Pokémon spawns"
+    "gamerule.repelRange": "Repel Range",
+    "gamerule.repelRange.description": "The range that Repels prevent Pokémon spawns"
 }
