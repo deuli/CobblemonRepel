@@ -26,6 +26,8 @@ public class CobblemonRepel implements ModInitializer {
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.FUNCTIONAL).register(g -> g.add(REPEL_BLOCK_ITEM));
 
         CobblemonEvents.POKEMON_ENTITY_SPAWN.subscribe(Priority.HIGHEST, event -> {
+            if (event.isCanceled()) return Unit.INSTANCE;
+
             ServerWorld world = event.getCtx().getWorld();
             BlockPos spawnPos = event.getCtx().getPosition();
             if (isRepelNearby(world, spawnPos)) {
