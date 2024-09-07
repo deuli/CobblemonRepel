@@ -6,6 +6,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
@@ -22,8 +23,14 @@ public class RepelBlockItem extends PolymerHeadBlockItem {
 
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
-        if (world != null)
-            tooltip.add(Text.translatable("block.cobblemonrepel.repel.info", Text.literal(String.valueOf(world.getGameRules().getInt(CobblemonRepel.REPEL_RANGE))).formatted(Formatting.LIGHT_PURPLE)).formatted(Formatting.GRAY));
+        if (world != null) {
+            int repelRange = world.getGameRules().getInt(CobblemonRepel.REPEL_RANGE);
+            if (repelRange > 0) {
+                MutableText rangeText = Text.literal(String.valueOf(repelRange)).formatted(Formatting.LIGHT_PURPLE);
+                tooltip.add(Text.translatable("block.cobblemonrepel.repel.info", rangeText).formatted(Formatting.GRAY));
+            } else
+                tooltip.add(Text.translatable("block.cobblemonrepel.repel.disabled").formatted(Formatting.RED));
+        }
         tooltip.add(Text.translatable("block.cobblemonrepel.repel.info.rightclick").formatted(Formatting.GRAY));
     }
 
