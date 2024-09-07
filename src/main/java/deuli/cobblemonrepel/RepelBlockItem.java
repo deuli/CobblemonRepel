@@ -31,7 +31,7 @@ public class RepelBlockItem extends PolymerHeadBlockItem {
             } else
                 tooltip.add(Text.translatable("block.cobblemonrepel.repel.disabled").formatted(Formatting.RED));
         }
-        tooltip.add(Text.translatable("block.cobblemonrepel.repel.info.rightclick").formatted(Formatting.GRAY));
+        tooltip.add(Text.translatable("block.cobblemonrepel.repel.info.right_click").formatted(Formatting.GRAY));
     }
 
     @Override
@@ -43,7 +43,7 @@ public class RepelBlockItem extends PolymerHeadBlockItem {
         if (CobblemonRepel.isRepelNearby((ServerWorld) world, user.getBlockPos()))
             user.sendMessage(Text.translatable("block.cobblemonrepel.repel.nearby"), true);
         else
-            user.sendMessage(Text.translatable("block.cobblemonrepel.repel.notfound"), true);
+            user.sendMessage(Text.translatable("block.cobblemonrepel.repel.not_found"), true);
 
         return TypedActionResult.success(activeItem);
     }

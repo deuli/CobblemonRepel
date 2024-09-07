@@ -3,8 +3,8 @@
     "item.cobblemonrepel.repel": "Repel",
 
     "block.cobblemonrepel.repel.info": "Prevents Pokémon spawns in a %s block radius",
-    "block.cobblemonrepel.repel.info.rightclick": "Right click in the air to check if any Repels are nearby",
+    "block.cobblemonrepel.repel.info.right_click": "Right click in the air to check if any Repels are nearby",
     "block.cobblemonrepel.repel.nearby": "There's already a Repel nearby",
-    "block.cobblemonrepel.repel.notfound": "No Repels found nearby",
+    "block.cobblemonrepel.repel.not_found": "No Repels found nearby",
     "block.cobblemonrepel.repel.disabled": "Repels have been disabled"
 }
