@@ -1,0 +1,28 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "ANA",
+        "IBI",
+        "IRI"
+    ],
+    "key": {
+        "A": {
+            "item": "cobblemon:green_apricorn"
+        },
+        "N": {
+            "item": "minecraft:iron_nugget"
+        },
+        "I": {
+            "item": "minecraft:iron_ingot"
+        },
+        "B": {
+            "tag": "cobblemon:berries"
+        },
+        "R": {
+            "item": "minecraft:rotten_flesh"
+        }
+    },
+    "result": {
+        "item": "cobblemonrepel:repel"
+    }
+}

@@ -53,6 +53,8 @@ dependencies {
     modImplementation "maven.modrinth:modmenu:7.2.2"
     modImplementation "maven.modrinth:fabric-language-kotlin:1.12.1+kotlin.2.0.20"
     modImplementation "maven.modrinth:cobblemon-spawn-notification:1.5-fabric-1.0.0"
+
+    modImplementation "maven.modrinth:emi:1.1.13+1.20.1+fabric"
 }
 
 processResources {
