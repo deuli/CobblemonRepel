@@ -1,6 +1,8 @@
 package deuli.cobblemonrepel;
 
+import eu.pb4.polymer.core.api.block.PolymerHeadBlock;
 import eu.pb4.polymer.core.api.item.PolymerHeadBlockItem;
+import net.minecraft.block.Block;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -11,20 +13,23 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
+import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
 public class RepelBlockItem extends PolymerHeadBlockItem {
-    public RepelBlockItem() {
-        super(CobblemonRepel.REPEL_BLOCK, new Item.Settings());
+    private final GameRules.Key<GameRules.IntRule> RANGE_GAMERULE;
+    public <T extends Block & PolymerHeadBlock> RepelBlockItem(T block, GameRules.Key<GameRules.IntRule> rangeGamerule) {
+        super(block, new Item.Settings());
+        RANGE_GAMERULE = rangeGamerule;
     }
 
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
         if (world != null) {
-            int repelRange = world.getGameRules().getInt(CobblemonRepel.REPEL_RANGE);
+            int repelRange = world.getGameRules().getInt(RANGE_GAMERULE);
             if (repelRange > 0) {
                 MutableText rangeText = Text.literal(String.valueOf(repelRange)).formatted(Formatting.LIGHT_PURPLE);
                 tooltip.add(Text.translatable("block.cobblemonrepel.repel.info", rangeText).formatted(Formatting.GRAY));

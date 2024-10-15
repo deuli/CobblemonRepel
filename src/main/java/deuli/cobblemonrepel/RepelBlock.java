@@ -21,20 +21,28 @@ public class RepelBlock extends Block implements PolymerHeadBlock {
     public static BooleanProperty ATTACHED = Properties.ATTACHED;
     public static final IntProperty ROTATION = Properties.ROTATION;
     public static final DirectionProperty FACING = HorizontalFacingBlock.FACING;
+    private final String POLYMER_SKIN_VALUE;
+    private final int REPEL_LEVEL;
 
-    public RepelBlock() {
+    public RepelBlock(String polymerSkinValue, int repelLevel) {
         super(Settings.create().nonOpaque().strength(2.5F, 3.5F));
+        POLYMER_SKIN_VALUE = polymerSkinValue;
+        REPEL_LEVEL = repelLevel;
+    }
+
+    public int getRepelLevel() {
+        return REPEL_LEVEL;
     }
 
     @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
         super.appendProperties(builder);
-        builder.add(ATTACHED).add(ROTATION).add(FACING);
+        builder.add(ATTACHED, ROTATION, FACING);
     }
 
     @Override
     public String getPolymerSkinValue(BlockState state, BlockPos pos, ServerPlayerEntity player) {
-        return "ewogICJ0aW1lc3RhbXAiIDogMTcyNDg1ODY1ODExMywKICAicHJvZmlsZUlkIiA6ICIxNTUyNmU1OGZhOWE0NjBmODhhNmZhNjk1M2RlNjgzNyIsCiAgInByb2ZpbGVOYW1lIiA6ICJQaWVkcml0YTE3IiwKICAic2lnbmF0dXJlUmVxdWlyZWQiIDogdHJ1ZSwKICAidGV4dHVyZXMiIDogewogICAgIlNLSU4iIDogewogICAgICAidXJsIiA6ICJodHRwOi8vdGV4dHVyZXMubWluZWNyYWZ0Lm5ldC90ZXh0dXJlLzkzNWJmZmExN2ZmYWM4Yzk4ZjIyODM0ZjFkZjM3NGMyNDlmY2FlNzhlNGI4MDAwMWE1OThhZmI4N2M4MDU5YyIKICAgIH0KICB9Cn0=";
+        return POLYMER_SKIN_VALUE;
     }
 
     @Override

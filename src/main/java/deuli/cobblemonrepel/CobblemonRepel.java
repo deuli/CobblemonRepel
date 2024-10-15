@@ -19,13 +19,29 @@ public class CobblemonRepel implements ModInitializer {
 
     public static final String MOD_ID = "cobblemonrepel";
 
-    public static final RepelBlock REPEL_BLOCK = Registry.register(Registries.BLOCK, Identifier.of(MOD_ID, "repel"), new RepelBlock());
-    public static final RepelBlockItem REPEL_BLOCK_ITEM = Registry.register(Registries.ITEM, Identifier.of(MOD_ID, "repel"), new RepelBlockItem());
     public static final GameRules.Key<GameRules.IntRule> REPEL_RANGE = GameRuleRegistry.register("repelRange", GameRules.Category.SPAWNING, GameRuleFactory.createIntRule(32, 0));
+    public static final GameRules.Key<GameRules.IntRule> SUPER_REPEL_RANGE = GameRuleRegistry.register("superRepelRange", GameRules.Category.SPAWNING, GameRuleFactory.createIntRule(64, 0));
+    public static final GameRules.Key<GameRules.IntRule> MAX_REPEL_RANGE = GameRuleRegistry.register("maxRepelRange", GameRules.Category.SPAWNING, GameRuleFactory.createIntRule(96, 0));
+
+    public static final String REPEL_TEXTURE = "ewogICJ0aW1lc3RhbXAiIDogMTcyNDg1ODY1ODExMywKICAicHJvZmlsZUlkIiA6ICIxNTUyNmU1OGZhOWE0NjBmODhhNmZhNjk1M2RlNjgzNyIsCiAgInByb2ZpbGVOYW1lIiA6ICJQaWVkcml0YTE3IiwKICAic2lnbmF0dXJlUmVxdWlyZWQiIDogdHJ1ZSwKICAidGV4dHVyZXMiIDogewogICAgIlNLSU4iIDogewogICAgICAidXJsIiA6ICJodHRwOi8vdGV4dHVyZXMubWluZWNyYWZ0Lm5ldC90ZXh0dXJlLzkzNWJmZmExN2ZmYWM4Yzk4ZjIyODM0ZjFkZjM3NGMyNDlmY2FlNzhlNGI4MDAwMWE1OThhZmI4N2M4MDU5YyIKICAgIH0KICB9Cn0=";
+    public static final RepelBlock REPEL_BLOCK = Registry.register(Registries.BLOCK, Identifier.of(MOD_ID, "repel"), new RepelBlock(REPEL_TEXTURE, 1));
+    public static final RepelBlockItem REPEL_BLOCK_ITEM = Registry.register(Registries.ITEM, Identifier.of(MOD_ID, "repel"), new RepelBlockItem(REPEL_BLOCK, REPEL_RANGE));
+
+    public static final String SUPER_REPEL_TEXTURE = "ewogICJ0aW1lc3RhbXAiIDogMTcyOTAxMTEwMzE4MywKICAicHJvZmlsZUlkIiA6ICIzYjBmNTM5MmRlNzM0YmZjYmJkOTMxYzMxYmFkODMxMCIsCiAgInByb2ZpbGVOYW1lIiA6ICJjYXRhbmRCIiwKICAic2lnbmF0dXJlUmVxdWlyZWQiIDogdHJ1ZSwKICAidGV4dHVyZXMiIDogewogICAgIlNLSU4iIDogewogICAgICAidXJsIiA6ICJodHRwOi8vdGV4dHVyZXMubWluZWNyYWZ0Lm5ldC90ZXh0dXJlLzU2MGIxNmZmYzlkMzk3MTY5MjY4YWFiOGQ5ZTdmMmU3MzlhNTQyODE5NjY5MzlhN2Q3MGZiZjM1ZWNjOGQwOGIiCiAgICB9CiAgfQp9";
+    public static final RepelBlock SUPER_REPEL_BLOCK = Registry.register(Registries.BLOCK, Identifier.of(MOD_ID, "super_repel"), new RepelBlock(SUPER_REPEL_TEXTURE, 2));
+    public static final RepelBlockItem SUPER_REPEL_BLOCK_ITEM = Registry.register(Registries.ITEM, Identifier.of(MOD_ID, "super_repel"), new RepelBlockItem(SUPER_REPEL_BLOCK, SUPER_REPEL_RANGE));
+
+    public static final String MAX_REPEL_TEXTURE = "ewogICJ0aW1lc3RhbXAiIDogMTcyOTAxMTE4MzA2NywKICAicHJvZmlsZUlkIiA6ICI5OWY1MzhjMDhlN2E0NTg3YmU4MGJjNGVmNzU0ZmQyMSIsCiAgInByb2ZpbGVOYW1lIiA6ICJTb2xvV1MyIiwKICAic2lnbmF0dXJlUmVxdWlyZWQiIDogdHJ1ZSwKICAidGV4dHVyZXMiIDogewogICAgIlNLSU4iIDogewogICAgICAidXJsIiA6ICJodHRwOi8vdGV4dHVyZXMubWluZWNyYWZ0Lm5ldC90ZXh0dXJlLzE0M2VjMTQ3ZGFjOTdjN2NlMzA2OWU2MTdiOWNmODU5ZTlkMTljOGNjODAxNmExM2VkYTEyMjc0ZDY4MTFmNzQiCiAgICB9CiAgfQp9";
+    public static final RepelBlock MAX_REPEL_BLOCK = Registry.register(Registries.BLOCK, Identifier.of(MOD_ID, "max_repel"), new RepelBlock(MAX_REPEL_TEXTURE, 3));
+    public static final RepelBlockItem MAX_REPEL_BLOCK_ITEM = Registry.register(Registries.ITEM, Identifier.of(MOD_ID, "max_repel"), new RepelBlockItem(MAX_REPEL_BLOCK, MAX_REPEL_RANGE));
 
     @Override
     public void onInitialize() {
-        ItemGroupEvents.modifyEntriesEvent(ItemGroups.FUNCTIONAL).register(g -> g.add(REPEL_BLOCK_ITEM));
+        ItemGroupEvents.modifyEntriesEvent(ItemGroups.FUNCTIONAL).register(g -> {
+            g.add(REPEL_BLOCK_ITEM);
+            g.add(SUPER_REPEL_BLOCK_ITEM);
+            g.add(MAX_REPEL_BLOCK_ITEM);
+        });
 
         CobblemonEvents.POKEMON_ENTITY_SPAWN.subscribe(Priority.HIGHEST, event -> {
             ServerWorld world = event.getCtx().getWorld();
@@ -43,6 +59,25 @@ public class CobblemonRepel implements ModInitializer {
 
     public static boolean isRepelNearby(ServerWorld world, BlockPos pos) {
         int repelRange = world.getGameRules().getInt(REPEL_RANGE);
-        return BlockPos.findClosest(pos, repelRange, repelRange, p -> world.getBlockState(p).getBlock().equals(REPEL_BLOCK)).isPresent();
+        int superRepelRange = world.getGameRules().getInt(SUPER_REPEL_RANGE);
+        int maxRepelRange = world.getGameRules().getInt(MAX_REPEL_RANGE);
+        int maxRange = Math.max(repelRange, Math.max(superRepelRange, maxRepelRange));
+
+        return BlockPos.findClosest(pos, maxRange, maxRange, p -> {
+            if (world.getBlockState(p).getBlock() instanceof RepelBlock repelBlock) {
+                int repelLevel = repelBlock.getRepelLevel();
+                int xRange = Math.abs(p.getX() - pos.getX());
+                int yRange = Math.abs(p.getY() - pos.getY());
+                int zRange = Math.abs(p.getZ() - pos.getZ());
+                if (repelLevel >= 1 && xRange < repelRange && yRange < repelRange && zRange < repelRange) {
+                    return true;
+                } else if (repelLevel >= 2 && xRange < superRepelRange && yRange < superRepelRange && zRange < superRepelRange) {
+                    return true;
+                } else
+                    return repelLevel >= 3 && xRange < maxRepelRange && yRange < maxRepelRange && zRange < maxRepelRange;
+            }
+
+            return false;
+        }).isPresent();
     }
 }
