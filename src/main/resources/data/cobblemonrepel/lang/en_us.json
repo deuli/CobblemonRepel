@@ -1,6 +1,10 @@
 {
     "block.cobblemonrepel.repel": "Repel",
     "item.cobblemonrepel.repel": "Repel",
+    "block.cobblemonrepel.super_repel": "Super Repel",
+    "item.cobblemonrepel.super_repel": "Super Repel",
+    "block.cobblemonrepel.max_repel": "Max Repel",
+    "item.cobblemonrepel.max_repel": "Max Repel",
 
     "block.cobblemonrepel.repel.info": "Prevents Pokémon spawns in a %s block radius",
     "block.cobblemonrepel.repel.info.right_click": "Right click in the air to check if any Repels are nearby",
@@ -9,5 +13,9 @@
     "block.cobblemonrepel.repel.disabled": "Repels have been disabled",
 
     "gamerule.repelRange": "Repel Range",
-    "gamerule.repelRange.description": "The range that Repels prevent Pokémon spawns"
+    "gamerule.repelRange.description": "The range that Repels prevent Pokémon spawns",
+    "gamerule.superRepelRangeMultiplier": "Super Repel Range Multiplier",
+    "gamerule.superRepelRangeMultiplier.description": "The multiplier for Super Repels (repelRange * multiplier)",
+    "gamerule.maxRepelRangeMultiplier": "Max Repel Range Multiplier",
+    "gamerule.maxRepelRangeMultiplier.description": "The multiplier for Max Repels (repelRange * multiplier)"
 }
