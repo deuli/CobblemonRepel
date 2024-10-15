@@ -19,7 +19,7 @@ public class CobblemonRepel implements ModInitializer {
 
     public static final String MOD_ID = "cobblemonrepel";
 
-    public static final GameRules.Key<GameRules.IntRule> REPEL_RANGE = GameRuleRegistry.register("repelRange", GameRules.Category.SPAWNING, GameRuleFactory.createIntRule(32, 0));
+    public static final GameRules.Key<GameRules.IntRule> REPEL_RANGE = GameRuleRegistry.register("repelRange", GameRules.Category.SPAWNING, GameRuleFactory.createIntRule(32, 0, 512));
     public static final GameRules.Key<GameRules.IntRule> SUPER_REPEL_RANGE_MULTIPLIER = GameRuleRegistry.register("superRepelRangeMultiplier", GameRules.Category.SPAWNING, GameRuleFactory.createIntRule(2, 0, 10));
     public static final GameRules.Key<GameRules.IntRule> MAX_REPEL_RANGE_MULTIPLIER = GameRuleRegistry.register("maxRepelRangeMultiplier", GameRules.Category.SPAWNING, GameRuleFactory.createIntRule(3, 0, 10));
 
