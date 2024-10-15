@@ -20,18 +20,20 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 public class RepelBlockItem extends PolymerHeadBlockItem {
-    private final GameRules.Key<GameRules.IntRule> RANGE_GAMERULE;
+    private final GameRules.Key<GameRules.IntRule> RANGE_MULTIPLIER;
     public <T extends Block & PolymerHeadBlock> RepelBlockItem(T block, GameRules.Key<GameRules.IntRule> rangeGamerule) {
         super(block, new Item.Settings());
-        RANGE_GAMERULE = rangeGamerule;
+        RANGE_MULTIPLIER = rangeGamerule;
     }
 
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
         if (world != null) {
-            int repelRange = world.getGameRules().getInt(RANGE_GAMERULE);
-            if (repelRange > 0) {
-                MutableText rangeText = Text.literal(String.valueOf(repelRange)).formatted(Formatting.LIGHT_PURPLE);
+            int repelRange = world.getGameRules().getInt(CobblemonRepel.REPEL_RANGE);
+            int multiplier = RANGE_MULTIPLIER == null ? 1 : world.getGameRules().getInt(RANGE_MULTIPLIER);
+            int totalRange = repelRange * multiplier;
+            if (totalRange > 0) {
+                MutableText rangeText = Text.literal(String.valueOf(totalRange)).formatted(Formatting.LIGHT_PURPLE);
                 tooltip.add(Text.translatable("block.cobblemonrepel.repel.info", rangeText).formatted(Formatting.GRAY));
             } else
                 tooltip.add(Text.translatable("block.cobblemonrepel.repel.disabled").formatted(Formatting.RED));
