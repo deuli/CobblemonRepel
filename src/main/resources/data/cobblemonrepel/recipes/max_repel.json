@@ -1,0 +1,22 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "DED",
+        "DRD",
+        "DED"
+    ],
+    "key": {
+        "R": {
+            "item": "cobblemonrepel:super_repel"
+        },
+        "D": {
+            "item": "minecraft:diamond"
+        },
+        "E": {
+            "tag": "cobblemon:evolution_items"
+        }
+    },
+    "result": {
+        "item": "cobblemonrepel:max_repel"
+    }
+}

@@ -1,0 +1,22 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "GEG",
+        "GRG",
+        "GEG"
+    ],
+    "key": {
+        "R": {
+            "item": "cobblemonrepel:repel"
+        },
+        "G": {
+            "item": "minecraft:gold_ingot"
+        },
+        "E": {
+            "tag": "cobblemon:experience_candies"
+        }
+    },
+    "result": {
+        "item": "cobblemonrepel:super_repel"
+    }
+}
