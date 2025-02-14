@@ -6,7 +6,7 @@
     "description": "Stop Pokémon spawns in an area",
     "authors": ["deuli"],
     "contact": {},
-    "license": "All-Rights-Reserved",
+    "license": "Apache-2.0",
     "icon": "assets/cobblemonrepel/icon.png",
     "environment": "*",
     "entrypoints": {
