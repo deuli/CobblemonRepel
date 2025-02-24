@@ -1,7 +1,7 @@
 plugins {
-    id 'fabric-loom' version '1.6-SNAPSHOT'
+    id 'fabric-loom' version '1.9.2'
     id 'maven-publish'
-    id "org.jetbrains.kotlin.jvm" version "1.9.21"
+    id "org.jetbrains.kotlin.jvm" version "2.1.0"
 }
 
 version = project.mod_version
@@ -52,6 +52,7 @@ dependencies {
 
     modImplementation "maven.modrinth:modmenu:${project.modmenu_version}"
     modImplementation "maven.modrinth:fabric-language-kotlin:${project.kotlin_version}"
+    modImplementation 'org.jetbrains.kotlin:kotlin-reflect:2.0.20'
     modImplementation "maven.modrinth:cobblemon-spawn-notification:${cobblemon_spawn_notification_version}"
 
     modImplementation "maven.modrinth:emi:${project.emi_version}"
@@ -70,7 +71,7 @@ processResources {
     }
 }
 
-def targetJavaVersion = 17
+def targetJavaVersion = 21
 tasks.withType(JavaCompile).configureEach {
     // ensure that the encoding is set to UTF-8, no matter what the system default is
     // this fixes some edge cases with special characters not displaying correctly

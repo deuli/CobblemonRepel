@@ -18,8 +18,7 @@
         "fabricloader": ">=0.16",
         "fabric": "*",
         "minecraft": "${minecraft_version}",
-        "cobblemon": ">=1.5.2",
-        "polymer-core": ">=0.5.19"
+        "cobblemon": ">=1.6"
     },
     "mixins": [
         "cobblemonrepel.mixins.json"
