@@ -13,30 +13,30 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
-import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
 
+import java.util.HashMap;
 import java.util.List;
 
 public class RepelBlockItem extends PolymerHeadBlockItem {
-    private final GameRules.Key<GameRules.IntRule> RANGE_MULTIPLIER;
-    public <T extends Block & PolymerHeadBlock> RepelBlockItem(T block, GameRules.Key<GameRules.IntRule> rangeGamerule) {
+    private final String repelType;
+
+    public static int RANGE;
+    public static HashMap<String, Integer> MULTIPLIERS = new HashMap<>();
+
+    public <T extends Block & PolymerHeadBlock> RepelBlockItem(T block, String repelType) {
         super(block, new Item.Settings());
-        RANGE_MULTIPLIER = rangeGamerule;
+        this.repelType = repelType;
     }
 
     @Override
     public void appendTooltip(ItemStack stack, TooltipContext context, List<Text> tooltip, TooltipType type) {
-//        if (world != null) {
-//            int repelRange = world.getGameRules().getInt(CobblemonRepel.REPEL_RANGE);
-//            int multiplier = RANGE_MULTIPLIER == null ? 1 : world.getGameRules().getInt(RANGE_MULTIPLIER);
-//            int totalRange = repelRange * multiplier;
-//            if (totalRange > 0) {
-//                MutableText rangeText = Text.literal(String.valueOf(totalRange)).formatted(Formatting.LIGHT_PURPLE);
-//                tooltip.add(Text.translatable("block.cobblemonrepel.repel.info", rangeText).formatted(Formatting.GRAY));
-//            } else
-//                tooltip.add(Text.translatable("block.cobblemonrepel.repel.disabled").formatted(Formatting.RED));
-//        }
+        int totalRange = RANGE * MULTIPLIERS.getOrDefault(repelType, 1);
+        if (totalRange > 0) {
+            MutableText rangeText = Text.literal(String.valueOf(totalRange)).formatted(Formatting.LIGHT_PURPLE);
+            tooltip.add(Text.translatable("block.cobblemonrepel.repel.info", rangeText).formatted(Formatting.GRAY));
+        } else
+            tooltip.add(Text.translatable("block.cobblemonrepel.repel.disabled").formatted(Formatting.RED));
         tooltip.add(Text.translatable("block.cobblemonrepel.repel.info.right_click").formatted(Formatting.GRAY));
     }
 
