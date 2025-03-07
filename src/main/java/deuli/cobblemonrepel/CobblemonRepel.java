@@ -8,13 +8,17 @@ import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.gamerule.v1.GameRuleFactory;
 import net.fabricmc.fabric.api.gamerule.v1.GameRuleRegistry;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
+import net.fabricmc.fabric.api.object.builder.v1.world.poi.PointOfInterestHelper;
 import net.minecraft.item.ItemGroups;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
+import net.minecraft.registry.RegistryKey;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.GameRules;
+import net.minecraft.world.poi.PointOfInterestStorage;
+import net.minecraft.world.poi.PointOfInterestType;
 
 public class CobblemonRepel implements ModInitializer {
 
@@ -35,6 +39,8 @@ public class CobblemonRepel implements ModInitializer {
     public static final String MAX_REPEL_TEXTURE = "ewogICJ0aW1lc3RhbXAiIDogMTcyOTAxMTE4MzA2NywKICAicHJvZmlsZUlkIiA6ICI5OWY1MzhjMDhlN2E0NTg3YmU4MGJjNGVmNzU0ZmQyMSIsCiAgInByb2ZpbGVOYW1lIiA6ICJTb2xvV1MyIiwKICAic2lnbmF0dXJlUmVxdWlyZWQiIDogdHJ1ZSwKICAidGV4dHVyZXMiIDogewogICAgIlNLSU4iIDogewogICAgICAidXJsIiA6ICJodHRwOi8vdGV4dHVyZXMubWluZWNyYWZ0Lm5ldC90ZXh0dXJlLzE0M2VjMTQ3ZGFjOTdjN2NlMzA2OWU2MTdiOWNmODU5ZTlkMTljOGNjODAxNmExM2VkYTEyMjc0ZDY4MTFmNzQiCiAgICB9CiAgfQp9";
     public static final RepelBlock MAX_REPEL_BLOCK = Registry.register(Registries.BLOCK, Identifier.of(MOD_ID, "max_repel"), new RepelBlock(MAX_REPEL_TEXTURE, 3));
     public static final RepelBlockItem MAX_REPEL_BLOCK_ITEM = Registry.register(Registries.ITEM, Identifier.of(MOD_ID, "max_repel"), new RepelBlockItem(MAX_REPEL_BLOCK, "max_repel"));
+
+    public static final PointOfInterestType REPEL_POI = PointOfInterestHelper.register(Identifier.of(MOD_ID, "repel"), 0, 1, REPEL_BLOCK, SUPER_REPEL_BLOCK, MAX_REPEL_BLOCK);//RegistryKey.of(Registries.POINT_OF_INTEREST_TYPE.getKey(), Identifier.of(MOD_ID, "repel"));
 
     @Override
     public void onInitialize() {
@@ -60,7 +66,7 @@ public class CobblemonRepel implements ModInitializer {
                 event.cancel();
             }
 
-//            Debug.handle(event);
+            Debug.handle(event);
 
             return Unit.INSTANCE;
         });
@@ -70,23 +76,34 @@ public class CobblemonRepel implements ModInitializer {
         int repelRange = world.getGameRules().getInt(REPEL_RANGE);
         int superMultiplier = world.getGameRules().getInt(SUPER_REPEL_RANGE_MULTIPLIER);
         int maxMultiplier = world.getGameRules().getInt(MAX_REPEL_RANGE_MULTIPLIER);
-        int maxRange = Math.max(repelRange * superMultiplier, repelRange * maxMultiplier);
+        int maxRange = repelRange * Math.max(superMultiplier, maxMultiplier);
 
-        return BlockPos.findClosest(pos, maxRange, maxRange, p -> {
-            if (world.getBlockState(p).getBlock() instanceof RepelBlock repelBlock) {
+        return world.getPointOfInterestStorage().getPositions(
+                poi -> poi.matchesKey(RegistryKey.of(Registries.POINT_OF_INTEREST_TYPE.getKey(), Identifier.of(MOD_ID, "repel"))),
+                $ -> true,
+                pos,
+                maxRange,
+                PointOfInterestStorage.OccupationStatus.ANY
+        ).anyMatch(matchPos -> {
+            if (world.getBlockState(matchPos).getBlock() instanceof RepelBlock repelBlock) {
                 int repelLevel = repelBlock.getRepelLevel();
-                int xRange = Math.abs(p.getX() - pos.getX());
-                int yRange = Math.abs(p.getY() - pos.getY());
-                int zRange = Math.abs(p.getZ() - pos.getZ());
+                int xRange = Math.abs(matchPos.getX() - pos.getX());
+                int yRange = Math.abs(matchPos.getY() - pos.getY());
+                int zRange = Math.abs(matchPos.getZ() - pos.getZ());
                 if (repelLevel >= 1 && xRange < repelRange && yRange < repelRange && zRange < repelRange) {
                     return true;
-                } else if (repelLevel >= 2 && xRange < repelRange * superMultiplier && yRange < repelRange * superMultiplier && zRange < repelRange * superMultiplier) {
-                    return true;
-                } else
-                    return repelLevel >= 3 && xRange < repelRange * maxMultiplier && yRange < repelRange * maxMultiplier && zRange < repelRange * maxMultiplier;
+                } else {
+                    int superRepelRange = repelRange * superMultiplier;
+                    if (repelLevel >= 2 && xRange < superRepelRange && yRange < superRepelRange && zRange < superRepelRange) {
+                        return true;
+                    } else {
+                        int maxRepelRange = repelRange * maxMultiplier;
+                        return repelLevel >= 3 && xRange < maxRepelRange && yRange < maxRepelRange && zRange < maxRepelRange;
+                    }
+                }
             }
 
             return false;
-        }).isPresent();
+        });
     }
 }
