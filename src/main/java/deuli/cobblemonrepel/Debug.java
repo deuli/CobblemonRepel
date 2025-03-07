@@ -15,7 +15,7 @@ public class Debug {
         BlockPos spawnPos = event.getEntity().getBlockPos();
         
         ArmorStandEntity armorStand = new ArmorStandEntity(world, spawnPos.getX(), spawnPos.getY() + 1, spawnPos.getZ());
-//            armorStand.setGlowing(true);
+//        armorStand.setGlowing(true);
         if (event.isCanceled())
             armorStand.equipStack(EquipmentSlot.HEAD, new ItemStack(Items.RED_CONCRETE));
         else
