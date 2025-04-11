@@ -66,7 +66,7 @@ public class CobblemonRepel implements ModInitializer {
                 event.cancel();
             }
 
-            Debug.handle(event);
+//            Debug.handle(event);
 
             return Unit.INSTANCE;
         });
