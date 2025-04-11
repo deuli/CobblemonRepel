@@ -2,6 +2,7 @@ package deuli.cobblemonrepel;
 
 import com.cobblemon.mod.common.api.Priority;
 import com.cobblemon.mod.common.api.events.CobblemonEvents;
+import com.cobblemon.mod.common.api.spawning.context.FishingSpawningContext;
 import kotlin.Unit;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
@@ -59,7 +60,10 @@ public class CobblemonRepel implements ModInitializer {
         CobblemonEvents.POKEMON_ENTITY_SPAWN.subscribe(Priority.HIGHEST, event -> {
             ServerWorld world = event.getCtx().getWorld();
 
-            if (event.isCanceled() || world.getGameRules().getInt(REPEL_RANGE) == 0) return Unit.INSTANCE;
+            if (event.isCanceled() ||
+                    world.getGameRules().getInt(REPEL_RANGE) == 0 ||
+                    event.getCtx() instanceof FishingSpawningContext
+            ) return Unit.INSTANCE;
 
             BlockPos spawnPos = event.getCtx().getPosition();
             if (isRepelNearby(world, spawnPos)) {
