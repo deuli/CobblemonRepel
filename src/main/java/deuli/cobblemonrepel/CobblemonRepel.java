@@ -101,8 +101,7 @@ public class CobblemonRepel implements ModInitializer {
                     if (repelLevel >= 2 && xRange < superRepelRange && yRange < superRepelRange && zRange < superRepelRange) {
                         return true;
                     } else {
-                        int maxRepelRange = repelRange * maxMultiplier;
-                        return repelLevel >= 3 && xRange < maxRepelRange && yRange < maxRepelRange && zRange < maxRepelRange;
+                        return repelLevel >= 3;
                     }
                 }
             }
