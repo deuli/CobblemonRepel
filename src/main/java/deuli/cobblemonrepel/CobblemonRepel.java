@@ -24,8 +24,8 @@ public class CobblemonRepel implements ModInitializer {
     public static final String MOD_ID = "cobblemonrepel";
 
     public static final GameRules.Key<GameRules.IntRule> REPEL_RANGE = GameRuleRegistry.register("repelRange", GameRules.Category.SPAWNING, GameRuleFactory.createIntRule(32, 0, 512));
-    public static final GameRules.Key<GameRules.IntRule> SUPER_REPEL_RANGE_MULTIPLIER = GameRuleRegistry.register("superRepelRangeMultiplier", GameRules.Category.SPAWNING, GameRuleFactory.createIntRule(2, 0, 10));
-    public static final GameRules.Key<GameRules.IntRule> MAX_REPEL_RANGE_MULTIPLIER = GameRuleRegistry.register("maxRepelRangeMultiplier", GameRules.Category.SPAWNING, GameRuleFactory.createIntRule(3, 0, 10));
+    public static final GameRules.Key<GameRules.IntRule> SUPER_REPEL_RANGE_MULTIPLIER = GameRuleRegistry.register("superRepelRangeMultiplier", GameRules.Category.SPAWNING, GameRuleFactory.createIntRule(2, 1, 10));
+    public static final GameRules.Key<GameRules.IntRule> MAX_REPEL_RANGE_MULTIPLIER = GameRuleRegistry.register("maxRepelRangeMultiplier", GameRules.Category.SPAWNING, GameRuleFactory.createIntRule(3, 1, 10));
 
     public static final String REPEL_TEXTURE = "ewogICJ0aW1lc3RhbXAiIDogMTcyNDg1ODY1ODExMywKICAicHJvZmlsZUlkIiA6ICIxNTUyNmU1OGZhOWE0NjBmODhhNmZhNjk1M2RlNjgzNyIsCiAgInByb2ZpbGVOYW1lIiA6ICJQaWVkcml0YTE3IiwKICAic2lnbmF0dXJlUmVxdWlyZWQiIDogdHJ1ZSwKICAidGV4dHVyZXMiIDogewogICAgIlNLSU4iIDogewogICAgICAidXJsIiA6ICJodHRwOi8vdGV4dHVyZXMubWluZWNyYWZ0Lm5ldC90ZXh0dXJlLzkzNWJmZmExN2ZmYWM4Yzk4ZjIyODM0ZjFkZjM3NGMyNDlmY2FlNzhlNGI4MDAwMWE1OThhZmI4N2M4MDU5YyIKICAgIH0KICB9Cn0=";
     public static final RepelBlock REPEL_BLOCK = Registry.register(Registries.BLOCK, Identifier.of(MOD_ID, "repel"), new RepelBlock(REPEL_TEXTURE, 1));
