@@ -18,6 +18,7 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.GameRules;
+import net.minecraft.world.poi.PointOfInterest;
 import net.minecraft.world.poi.PointOfInterestStorage;
 import net.minecraft.world.poi.PointOfInterestType;
 
@@ -82,13 +83,12 @@ public class CobblemonRepel implements ModInitializer {
         int maxMultiplier = world.getGameRules().getInt(MAX_REPEL_RANGE_MULTIPLIER);
         int maxRange = repelRange * Math.max(superMultiplier, maxMultiplier);
 
-        return world.getPointOfInterestStorage().getPositions(
+        return world.getPointOfInterestStorage().getInSquare(
                 poi -> poi.matchesKey(RegistryKey.of(Registries.POINT_OF_INTEREST_TYPE.getKey(), Identifier.of(MOD_ID, "repel"))),
-                $ -> true,
                 pos,
                 maxRange,
                 PointOfInterestStorage.OccupationStatus.ANY
-        ).anyMatch(matchPos -> {
+        ).map(PointOfInterest::getPos).anyMatch(matchPos -> {
             if (world.getBlockState(matchPos).getBlock() instanceof RepelBlock repelBlock) {
                 int repelLevel = repelBlock.getRepelLevel();
                 int xRange = Math.abs(matchPos.getX() - pos.getX());
