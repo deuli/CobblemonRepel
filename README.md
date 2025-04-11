@@ -22,10 +22,10 @@ Any Apricorn can be used, any Cobblemon Berry can be used, any Experience Candy 
 
 
 ## Configuration
-The range of each Repel can be configured with the `/gamerule` command. Setting their value to 0 will disable the respective Repel.
-- `repelRange` - The base range used for regular Repels, other Repels use this with a multiplier, can be a value between 0 and 512, default is 32
-- `superRepelRangeMultipler` - The multiplier for the Super Repels, can be a value between 0 and 10, default is 2
-- `maxRepelRangeMultipler` - The multiplier for the Max Repels, can be a value between 0 and 10, default is 3
+The range of each Repel can be configured with the `/gamerule` command.
+- `repelRange` - The base range used for regular Repels, other Repels use this with a multiplier, can be a value between 0 and 512, default is 32. Setting this value to 0 will completely disable the Repels
+- `superRepelRangeMultipler` - The multiplier for the Super Repels, can be a value between 1 and 10, default is 2
+- `maxRepelRangeMultipler` - The multiplier for the Max Repels, can be a value between 1 and 10, default is 3
 
 ## Mod Support
 Cobblemon Repel has support for [Cobblemon Spawn Notification](https://modrinth.com/mod/cobblemon-spawn-notification), where it disables the broadcast if the spawned Pokémon was caught by a Repel.
