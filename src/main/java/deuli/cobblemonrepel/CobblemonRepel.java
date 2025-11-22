@@ -2,7 +2,8 @@ package deuli.cobblemonrepel;
 
 import com.cobblemon.mod.common.api.Priority;
 import com.cobblemon.mod.common.api.events.CobblemonEvents;
-import com.cobblemon.mod.common.api.spawning.context.FishingSpawningContext;
+import com.cobblemon.mod.common.api.spawning.position.FishingSpawnablePosition;
+import com.cobblemon.mod.common.api.spawning.position.SpawnablePosition;
 import kotlin.Unit;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
@@ -43,6 +44,7 @@ public class CobblemonRepel implements ModInitializer {
     public static final RepelBlockItem MAX_REPEL_BLOCK_ITEM = Registry.register(Registries.ITEM, Identifier.of(MOD_ID, "max_repel"), new RepelBlockItem(MAX_REPEL_BLOCK, "max_repel"));
 
     public static final PointOfInterestType REPEL_POI = PointOfInterestHelper.register(Identifier.of(MOD_ID, "repel"), 0, 1, REPEL_BLOCK, SUPER_REPEL_BLOCK, MAX_REPEL_BLOCK);//RegistryKey.of(Registries.POINT_OF_INTEREST_TYPE.getKey(), Identifier.of(MOD_ID, "repel"));
+    public static final RegistryKey<PointOfInterestType> REPEL_POI_REGISTRY = RegistryKey.of(Registries.POINT_OF_INTEREST_TYPE.getKey(), Identifier.of(MOD_ID, "repel"));
 
     @Override
     public void onInitialize() {
@@ -59,14 +61,15 @@ public class CobblemonRepel implements ModInitializer {
         });
 
         CobblemonEvents.POKEMON_ENTITY_SPAWN.subscribe(Priority.HIGHEST, event -> {
-            ServerWorld world = event.getCtx().getWorld();
+            SpawnablePosition spawnablePosition = event.getSpawnablePosition();
+            ServerWorld world = spawnablePosition.getWorld();
 
             if (event.isCanceled() ||
                     world.getGameRules().getInt(REPEL_RANGE) == 0 ||
-                    event.getCtx() instanceof FishingSpawningContext
+                    spawnablePosition instanceof FishingSpawnablePosition
             ) return Unit.INSTANCE;
 
-            BlockPos spawnPos = event.getCtx().getPosition();
+            BlockPos spawnPos = spawnablePosition.getPosition();
             if (isRepelNearby(world, spawnPos)) {
                 event.cancel();
             }
@@ -84,7 +87,7 @@ public class CobblemonRepel implements ModInitializer {
         int maxRange = repelRange * Math.max(superMultiplier, maxMultiplier);
 
         return world.getPointOfInterestStorage().getInSquare(
-                poi -> poi.matchesKey(RegistryKey.of(Registries.POINT_OF_INTEREST_TYPE.getKey(), Identifier.of(MOD_ID, "repel"))),
+                poi -> poi.matchesKey(REPEL_POI_REGISTRY),
                 pos,
                 maxRange,
                 PointOfInterestStorage.OccupationStatus.ANY

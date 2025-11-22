@@ -11,7 +11,7 @@ import net.minecraft.util.math.BlockPos;
 
 public class Debug {
     public static void handle(SpawnEvent<PokemonEntity> event) {
-        ServerWorld world = event.getCtx().getWorld();
+        ServerWorld world = event.getSpawnablePosition().getWorld();
         BlockPos spawnPos = event.getEntity().getBlockPos();
         
         ArmorStandEntity armorStand = new ArmorStandEntity(world, spawnPos.getX(), spawnPos.getY() + 1, spawnPos.getZ());
