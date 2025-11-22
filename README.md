@@ -31,4 +31,6 @@ The range of each Repel can be configured with the `/gamerule` command.
 Cobblemon Repel has support for [Cobblemon Spawn Notification](https://modrinth.com/mod/cobblemon-spawn-notification), where it disables the broadcast if the spawned Pokémon was caught by a Repel.
 
 ## (Neo)Forge?
-No, because [Polymer](https://modrinth.com/mod/polymer) is currently Fabric only.
+I won't port it to NeoForge, due to [Polymer](https://modrinth.com/mod/polymer) being Fabric only.
+
+Someone did port this mod to NeoForge however! You can find it [here](https://modrinth.com/mod/cobblemon-repel-neoreforged).
