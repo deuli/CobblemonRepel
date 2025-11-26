@@ -2,6 +2,7 @@ package deuli.cobblemonrepel;
 
 import com.cobblemon.mod.common.api.Priority;
 import com.cobblemon.mod.common.api.events.CobblemonEvents;
+import com.cobblemon.mod.common.api.spawning.position.BasicSpawnablePosition;
 import com.cobblemon.mod.common.api.spawning.position.FishingSpawnablePosition;
 import com.cobblemon.mod.common.api.spawning.position.SpawnablePosition;
 import kotlin.Unit;
@@ -66,7 +67,8 @@ public class CobblemonRepel implements ModInitializer {
 
             if (event.isCanceled() ||
                     world.getGameRules().getInt(REPEL_RANGE) == 0 ||
-                    spawnablePosition instanceof FishingSpawnablePosition
+                    spawnablePosition instanceof FishingSpawnablePosition ||
+                    spawnablePosition.getSpawner().getName().startsWith("poke_snack_")
             ) return Unit.INSTANCE;
 
             BlockPos spawnPos = spawnablePosition.getPosition();
