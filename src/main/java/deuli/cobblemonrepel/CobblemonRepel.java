@@ -2,7 +2,6 @@ package deuli.cobblemonrepel;
 
 import com.cobblemon.mod.common.api.Priority;
 import com.cobblemon.mod.common.api.events.CobblemonEvents;
-import com.cobblemon.mod.common.api.spawning.position.BasicSpawnablePosition;
 import com.cobblemon.mod.common.api.spawning.position.FishingSpawnablePosition;
 import com.cobblemon.mod.common.api.spawning.position.SpawnablePosition;
 import kotlin.Unit;
